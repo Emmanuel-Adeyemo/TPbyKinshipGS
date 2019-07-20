@@ -1,25 +1,22 @@
-# July 15, 2019
-#' Calculate lambda from REML
+# July 18, 2019
+#' Calculate predictive ability
 #'
 #' @description
-#' Uses a RR-BLUP mixed model to estimate the marker variance (Vm) and the residual variance
-#' (Ve) to be used to calculate lambda
+#' Uses a RR-BLUP mixed model to estimate GEBV of lines
 #'
 #' @references Endelman, J. B. 2011. Ridge Regression and Other Kernels for Genomic Selection
 #' with R Package rrBLUP. Plant Genome 4:250-255. doi:10.3835/plantgenome2011.08.0024
 #'
-#' @param validate_id a matrix of phenotypes for trait of interest in training population.
-#' @param train_kinship An incidence matrix of genotypes for the training population.
-#' @param selected An incidence matrix of genotypes for the prediction population
-#' (i.e. selection candidates).
-#' @param pheno A dataframe of observed phenotypes for the validation population
-#' to be used for calculating predicting accuracy of the trained model
-#' @param geno a matrix of phenotypes for trait of interest in training population.
-#' @param trait An incidence matrix of genotypes for the training population.
-#' @param threshold An incidence matrix of genotypes for the training population.
+#' @param validate_id a list of line names thet were not selected by CD algorithm (VP)
+#' @param train_kinship A matrix of kinship relationship among lines in the training population.
+#' @param selected The number of lines (TP) selected from the CD algorithm
+#' @param pheno A dataframe of lines with their phenotypic data
+#' @param geno a matrix of genotypic data for lines in training population.
+#' @param trait The trait of interest. Should be written as a character in quotation marks.
+#' @param threshold The least amount of similarity the lines used for TP should have.
 #'
 #' @return
-#' lambda
+#' outer.list
 #'
 #' @import rrBLUP
 #'
