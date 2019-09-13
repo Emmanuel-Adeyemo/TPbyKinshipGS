@@ -2,7 +2,7 @@
 #' Calculate predictive ability
 #'
 #' @description
-#' Uses a RR-BLUP mixed model to estimate GEBV of lines
+#' Uses a RR-BLUP mixed model to estimate GEBV of lines with and without the kinship model
 #'
 #' @references Endelman, J. B. 2011. Ridge Regression and Other Kernels for Genomic Selection
 #' with R Package rrBLUP. Plant Genome 4:250-255. doi:10.3835/plantgenome2011.08.0024
