@@ -22,19 +22,19 @@ calculate.marker.similarity <- function(geno){
   pairs <- combn(names(geno), 2, simplify=FALSE) # does name pairiing
   pairs_mar <- combn(geno2, 2,simplify = FALSE) # does marker pairing
   
-  #Walking through the parents-Molecular Markers for each pop, obtaining CS
+  # Going through the lines to obtain the coefficient of similarities
   coefPopAll <- NULL
   
-  for(h in 1:length(pairs_mar)){ #for each pop
+  for(h in 1:length(pairs_mar)){ #for each pair
     
-    p1 <- pairs_mar[[h]][, 1] #parents from each pop
+    p1 <- pairs_mar[[h]][, 1] #lines from each pair
     p2 <- pairs_mar[[h]][, 2]
     
-    pTog <- rbind(p1, p2) #parents together
+    pTog <- rbind(p1, p2) #lines together
     
     coef.sim.all <- NULL
     for(m in 1:ncol(pTog)){
-      if(!is.na(pTog[1,m]) & !is.na(pTog[2,m])){ #to avoid NA
+      if(!is.na(pTog[1,m]) & !is.na(pTog[2,m])){ #to avoid NAs
         if(pTog[1,m] == pTog[2,m]){ #equal homozygous state 
           coef.sim <- 1 #coefficient of 1
         }
@@ -47,7 +47,7 @@ calculate.marker.similarity <- function(geno){
       }
       coef.sim.all <- c(coef.sim.all, coef.sim) #saving coefs
     }
-    coef.sim.all <- as.numeric(coef.sim.all) #CS between parents for the pop
+    coef.sim.all <- as.numeric(coef.sim.all) #CS between lines for the pop
     coef.all.pairs.av <- round(mean(coef.sim.all, na.rm = T), 2) #average
     coefPop <- c(coef.all.pairs.av, h)
     coefPopAll <- rbind(coefPopAll, coefPop)
