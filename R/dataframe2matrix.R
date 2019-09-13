@@ -4,6 +4,7 @@
 #' Converts three columns of a data.frame into a matrix. Two of the columns form
 #' the row and col dimensions of the matrix. The third column provides values for
 #' the matrix.
+#' for making custom G with 0 - 2 bounds
 #'
 #'
 #' @param data data.frame: input data
