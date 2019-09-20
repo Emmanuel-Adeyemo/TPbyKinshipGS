@@ -32,11 +32,14 @@ cross.validation.models <- function(pheno_train_trait, geno_train, model = "All_
   pheno_train_trait <- as.matrix(pheno_train_trait)
   geno_train <- as.matrix(geno_train)
   phenoTrait <- pheno_train_trait
+  nTST <- nTST; n <- nrow(geno_train); p <-ncol(geno_train)
+  nRep <- nRep; nIter<-nIter; burnIn<-burnIn
+  G <- tcrossprod(geno)/p
 
   if (model == "RRBLUP"){
 
     rownames(geno_train) <- 1:nrow(geno_train) #give "gid" to marker data
-    genoD <- as.matrix(dist(geno_train)) #calculate D # runs forever!
+    genoD <- as.matrix(dist(geno_train)) #calculate genetic distance
 
     phenoTrait <- pheno_train_trait
 
@@ -63,8 +66,6 @@ cross.validation.models <- function(pheno_train_trait, geno_train, model = "All_
     phenoTrait <- pheno_train_trait                    ##is vector
     y <- scale(phenoTrait, center=TRUE, scale=TRUE)  ## is matrix
 
-    nTST <- nTST; n <- nrow(geno_train); p <-ncol(geno_train); nRep <- nRep; nIter<-nIter; burnIn<-burnIn
-
     ETA<-list(MRK=list(X=geno_train,model="BayesB", probIn=probIn))
 
     pred_ability <- matrix(nrow=nRep, ncol=1, NA)
@@ -82,9 +83,8 @@ cross.validation.models <- function(pheno_train_trait, geno_train, model = "All_
 
     phenoTrait <- pheno_train_trait# is vector
     y <- scale(phenoTrait, center=TRUE, scale=TRUE) # is matrix
-
-    nTST <- nTST; n=nrow(geno_train); p=ncol(geno_train); nRep=nRep; nIter<-nIter; burnIn<-burnIn
-    G <- tcrossprod(geno)/p; ETA<-list(MRK=list(K=G,model="RKHS"))
+   
+    ETA<-list(MRK=list(K=G,model="RKHS"))
 
     pred_ability <- matrix(nrow=nRep, ncol=1, NA)
     for(i in 1:nRep){
@@ -122,8 +122,6 @@ cross.validation.models <- function(pheno_train_trait, geno_train, model = "All_
     # BB
     y <- scale(phenoTrait, center=TRUE, scale=TRUE)  ## is matrix
 
-    nTST <- nTST; n <- nrow(geno_train); p <-ncol(geno_train); nRep <- nRep; nIter<-nIter; burnIn<-burnIn
-
     ETA<-list(MRK=list(X=geno_train,model="BayesB", probIn=probIn))
 
     pred_ability_bb <- matrix(nrow=nRep, ncol=1, NA)
@@ -135,7 +133,7 @@ cross.validation.models <- function(pheno_train_trait, geno_train, model = "All_
     }
 
     # RKHS
-    G <- tcrossprod(geno_train)/p; ETA<-list(MRK=list(K=G,model="RKHS"))
+    ETA<-list(MRK=list(K=G,model="RKHS"))
 
     pred_ability_rkhs <- matrix(nrow=nRep, ncol=1, NA)
     for(i in 1:nRep){
