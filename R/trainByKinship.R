@@ -24,14 +24,13 @@
 get.train.by.kinship <- function(line_id, ki_train, threshold){
 
 
-  for(i in line_id){
-    train_by_kinship <- ki_train %>% dplyr::select(ID = ID, i) %>% filter(ki_train[i] >= threshold) %>% dplyr::select(-i)  # selects only column
+  train_by_kinship <- ki_train %>% dplyr::select(ID = ID, i) %>% filter(ki_train[i] >= threshold) %>% dplyr::select(-i)  
+    # selects only column
     # that == i(line ID) and ID(contains rownames)
     # filters out individuals less than the threshold provided
     # lastly, takes out the column i, only id is left
-    return(train_by_kinship)
-  }
-
+  return(train_by_kinship)
+  
 } # Close the function
 
 
