@@ -84,7 +84,7 @@ calculate.prediction.ability <- function(validate_id,
     validate_pheno = do.antijoin(selected, pheno) # gets phenotypic data for line being predicted
     validate_geno = do.antijoin(selected, geno) # gets genotypic data for line being predicted
 
-    no_kinship = make.predictions.no.kinship(train_pheno$DIS, train_geno, validate_pheno$DIS, validate_geno)
+    no_kinship = make.predictions.no.kinship(train_pheno[,trait], train_geno, validate_pheno[,trait], validate_geno)
 
     out.list <- list(predictions_random,predictions_kinship, kinship_random_training_size, training_size, no_kinship )
 
